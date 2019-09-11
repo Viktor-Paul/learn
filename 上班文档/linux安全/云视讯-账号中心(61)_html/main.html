@@ -1,0 +1,1796 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>安全配置核查综合评估报告</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+body {
+	font: 12px/1.5 "Microsoft YaHei", "Arial", "宋体";
+}
+table.datagrid {
+	width: 100%;
+	border-top: 1px solid #d3e1ed; /*c8d8e7*/
+	border-right: 1px solid #d3e1ed;
+	border-collapse: collapse;
+}
+table.datagrid caption {
+	width: 200px;
+	color: #66a3d3;
+	font-size: .94em;
+	margin: 1em 0 0 0;
+	padding: 0 0 5px 0;
+	caption-side: top;
+	text-align: right;
+}
+table.datagrid td {
+	font-size: 12px;
+	border-bottom: 1px solid #d3e1ed;
+	border-left: 1px solid #d3e1ed;
+	padding: .3em .5em;
+	word-wrap: break-word;
+	word-break: break-all;
+}
+table.datagrid th {
+	text-align: left;
+	border-bottom: 1px solid #c8d8e7;
+	border-left: 1px solid #c8d8e7;
+	padding: .3em .5em;
+	white-space: nowrap;
+}
+table.datagrid thead tr {
+	font-size: 12px;
+	text-align: center;
+	font-weight: 600;
+}
+table.datagrid thead tr td {
+	font-size: 12px;
+	text-align: center;
+	font-weight: 600;
+}
+table.datagrid tfoot th {
+	text-align: center;
+}
+table.datagrid td.link {
+	width: 70%;
+	text-align: left;
+}
+textarea {
+	border: 0;
+	resize: none;
+	overflow: hidden;
+	margin-left: 1px;
+	margin-right: -8px;
+	font-size: 12px;
+}
+a {
+	font-size: 12px;
+/* 	text-decoration: none; */
+	font: 12px/1.5 "Microsoft YaHei", "Arial", "宋体";
+}
+#header {
+    
+	padding-top: 1px;
+	margin: 0px auto;
+	overflow: hidden;
+	width: 900px;
+}
+
+#header div img {
+	padding-right: 18px;
+	float: right;
+	width: 150px;
+	height: 40px;
+}
+#header-words{
+    border:1px solid #6fb4df;
+	text-align: center;
+	/* background:#99CCFF;  */
+	font-size: 21px;
+	font-weight: 800;
+	/* firefiox 圆角 */
+	-moz-border-radius: 6px 6px 0 0;
+	padding: 10px 20px; 
+}
+#header-inner {
+	text-align: center;
+	padding: 0px 20px; 
+	/* background:#99CCFF;  */
+	font-size: 21px;
+	font-weight: 800;
+	/* firefiox 圆角 */
+	-moz-border-radius: 6px 6px 0 0;
+	margin: 0 auto;
+	height: 40px;
+	background-color: #6fb4df;
+}
+#footer {
+	width: 900px;
+	margin: 0px auto;
+	clear: both;
+	height: 48px;
+	overflow: hidden;
+}
+#footer-inner {
+	margin: 0 auto;
+	padding: 0px 8px;
+	margin-bottom: 8px;
+	height: 40px;
+	background-color: #6fb4df;
+}
+#footer p {
+	color: #fff;
+	display: inline;
+}
+#footer p.copyright {
+	padding-left: 18px;
+	float: left;
+}
+#footer img {
+	padding-right: 18px;
+	float: right;
+	width: 150px;
+	height: 40px;
+}
+#main {
+	margin: 0px auto;
+	overflow: hidden;
+	width: 900px;
+}
+#main-inner h2.round-corner {
+	background: #6fb4df;
+	margin: 10px 0px 0 0px;
+	border: 0px solid #69c;
+	border-bottom: 0;
+	-moz-border-radius: 6px 6px 0 0;
+}
+#main-inner h2.round-corners {
+	background: #6fb4df;
+	margin: 0px 0px 0 0px;
+	border: 0px solid #69c;
+	border-bottom: 0;
+	-moz-border-radius: 6px 6px 0 0;
+}
+#main-inner h2.round-corner span {
+	display: block;
+	padding: 5px 8px;
+	color: #fff;
+	font-weight: 600;
+	font-size: 14px;
+	color: black;
+}
+#main-inner div.box {
+	padding: 0px;
+	background: #fff;
+	border: 1px solid #6fb4df;
+}
+.hid {
+	overflow: hidden;
+}
+</style>
+<link rel="stylesheet" href="./css/Style.css" type="text/css" />
+<script type="text/javascript" src="./js/jquery.js"></script>
+<script language="javascript">
+   //aka makeDesignerHappy(dEl);
+      function breakWord(dEl){
+        if(!dEl || dEl.nodeType !== 1){
+          return false;
+        } else if(dEl.currentStyle && typeof dEl.currentStyle.wordBreak === 'string'){
+          //Lazy Function Definition Pattern, Peter's Blog
+          //From http://peter.michaux.ca/article/3556
+          breakWord = function(dEl){
+            //For Internet Explorer
+            dEl.runtimeStyle.wordBreak = 'break-all';
+            return true;
+          }
+          return breakWord(dEl);
+        }else if(document.createTreeWalker){
+          //Faster Trim in Javascript, Flagrant Badassery
+          //http://blog.stevenlevithan.com/archives/faster-trim-javascript
+          var trim = function  (str) {
+            str = str.replace(/^\s\s*/, '');
+            var ws = /\s/,
+            i = str.length;
+            while (ws.test(str.charAt(--i)));
+            return str.slice(0, i + 1);
+          }
+          //Lazy Function Definition Pattern, Peter's Blog
+          //From http://peter.michaux.ca/article/3556
+          breakWord = function(dEl){
+            //For Opera, Safari, and Firefox
+            var dWalker = document.createTreeWalker(dEl, NodeFilter.SHOW_TEXT, null, false);
+            var node,s,c = String.fromCharCode('8203');
+            while (dWalker.nextNode()){
+              node = dWalker.currentNode;
+              //we need to trim String otherwise Firefox will display 
+              //incorect text-indent with space characters
+              s = trim( node.nodeValue ) .split('').join(c);
+              node.nodeValue = s;
+            }
+            return true;
+          }
+          return breakWord(dEl);
+        }else{
+          return false;
+        }
+      }
+</script>
+</head>
+<body>
+<a name="top"></a>
+	
+	<div id="header">
+		     <div id="header-inner">
+				<img  src="images/header.png" />
+			</div>
+			<div id="header-words">安全配置核查综合评估报告 </div>
+	</div>
+	
+	<div id="main">
+		
+		<!-- 内容区开始  -->
+		<div id="main-inner">
+			
+				<h2 class="round-corners">
+					<span>目录</span>
+				</h2>
+				<div class="box">
+						<ul style="line-height: 8px;color: #1B609A;">
+							<li><a href="#title1">1.概述信息</a></li>
+						</ul>
+					
+						<ul style="line-height: 8px;color: #1B609A;">
+							<li><a href="#title2">2.设备分类统计</a></li>
+						</ul>
+						<ul style="line-height: 8px;color: #1B609A;">
+							<li><a href="#title3">3.设备风险等级TOP 10</a></li>
+						</ul>
+						<ul style="line-height: 8px;color: #1B609A;">
+							<li><a href="#title4">4.设备风险等级汇总</a></li>
+						</ul>
+						<ul style="line-height: 8px;color: #1B609A;">
+							<li><a href="#title5">5.不合规检查项TOP 10</a></li>
+						</ul>
+						<ul style="line-height: 8px;color: #1B609A;">
+							<li><a href="#title6">6.不合规检查项汇总</a></li>
+						</ul>
+						<ul style="line-height: 8px;color: #1B609A;">
+							<li><a href="#title7">7.设备核查失败列表</a></li>
+						</ul>
+				</div>
+			
+				<h2 class="round-corner">
+					<span id="title1">1.概述信息</span>
+				</h2>
+				<div class="box">
+					<table class="datagrid">
+						<tr class="odd">
+							<td style="width: 20%">任务名称</td>
+							<td style="width: 80%">云视讯-账号中心</td>
+						</tr>
+						<tr class="odd">
+							<td style="width: 20%">策略名称</td>
+							<td style="width: 80%">全局策略</td>
+						</tr>
+						<tr class="odd">
+							<td style="width: 20%">检查设备数</td>
+							<td style="width: 80%">20</td>
+						</tr>
+						<tr class="odd">
+							<td style="width: 20%">合规率</td>
+							<td style="width: 80%">46.67%</td>
+						</tr>
+						<tr class="odd">
+							<td style="width: 20%">检查项情况</td>
+							<td style="width: 80%">总数:842;合规数:393;不合规数:411;人工确认:38;失败数:0;</td>
+						</tr>
+						<tr class="odd">
+							<td style="width: 20%">核查时间</td>
+							<td style="width: 80%">2018-11-01 16:29:56&nbsp;至&nbsp;2018-11-22 15:24:54</td>
+						</tr>
+						<tr class="odd">
+							<td style="width: 20%">报告生成时间</td>
+							<td style="width: 80%">2018-11-01 16:33:29</td>
+						</tr>
+						<tr class="odd">
+							<td style="width: 20%">评分区间的风险说明</td>
+							<td style="width: 80%"><pre>高危(0-40,不包括40):分数过低,设备存在高危风险;
+中级(40-80):分数较低,设备存在中度风险;
+安全(80-100,不包括80):分数高,设备处于安全状态;</pre></td>
+						</tr>
+					</table>
+	
+					<table class='report_table' width='100%' border='0' cellpadding='0'>
+						<tr class='odd'>
+							<td style="text-align: center;">
+								<div id="imagediv1" style="margin: 0pt auto; text-align: center;">
+									<img  src="images/imagediv1.png" width="600" height="350" />
+								</div>
+							</td>
+						</tr>
+						<tr class='even'>
+							<td>
+								<div style='text-align: center; width: 100%; font-size: 12px;'>
+									综合评分分布图</div>
+							</td>
+						</tr>
+					</table>
+					<table class='report_table' width='100%' border='0' cellpadding='0'>
+						<tr class='odd'>
+							<td style="text-align: center;">
+								<div id="imagediv2" style="margin: 0pt auto; text-align: center;">
+									<img  src="images/imagediv2.png" width="600" height="350" />
+								</div>
+							</td>
+						</tr>
+						<tr class='even'>
+							<td>
+								<div style='text-align: center; width: 100%; font-size: 12px;'>
+									不合规检查项数量汇总分布图</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+			
+				<h2 class="round-corner">
+					<span id="title2">2.设备分类统计</span>
+				</h2>
+				<div class="box">
+					<table class="datagrid">
+						<thead>
+							<tr class="odd">
+								<td style="width: 20%">类型</td>
+								<td style="width: 20%">设备数</td>
+								<td style="width: 20%">平均得分</td>
+								<td style="width: 20%">最高得分</td>
+								<td style="width: 20%">最低得分</td>
+							</tr>
+						</thead>
+						<tbody>
+								<tr>
+									<td>/中间件/Tomcat</td>
+									<td style="text-align: center;">2</td>
+									<td class="score" style="text-align: center;">24(高危)</td>
+									<td class="score" style="text-align: center;">24(高危)</td>
+									<td class="score" style="text-align: center;">24(高危)</td>
+								</tr>
+								<tr class='even'>
+									<td>/数据库/MySql</td>
+									<td style="text-align: center;">4</td>
+									<td class="score" style="text-align: center;">42(中级)</td>
+									<td class="score" style="text-align: center;">70(中级)</td>
+									<td class="score" style="text-align: center;">23(高危)</td>
+								</tr>
+								<tr>
+									<td>/主机/Linux</td>
+									<td style="text-align: center;">14</td>
+									<td class="score" style="text-align: center;">53(中级)</td>
+									<td class="score" style="text-align: center;">57(中级)</td>
+									<td class="score" style="text-align: center;">49(中级)</td>
+								</tr>
+						</tbody>
+					</table>
+				</div>
+			
+				<h2 class="round-corner">
+					<span id="title3">3.设备风险等级TOP 10</span>
+				</h2>
+	
+				<div class="box" style="text-align: center;">
+	
+					<div id="imagediv3" style="padding-bottom: 10px; padding-top: 10px; margin: 0pt auto; text-align: center;">
+						<img  src="images/imagediv3.png" width="600" height="350" />
+					</div>
+				</div>
+
+				<h2 class="round-corner">
+					<span id="title4">4.设备风险等级汇总</span>
+				</h2>
+				<div class="box">
+	
+					<table class="datagrid">
+						<thead>
+							<tr class="odd">
+								<td colspan='1' rowspan='2' scope="col" style="width: 15%">设备名称</td>
+								<td colspan='1' rowspan='2' scope="col" style="width: 15%">设备IP</td>
+								<td colspan='1' rowspan='2' scope="col" style="width: 20%">设备类型</td>
+								<td colspan='1' rowspan='2' scope="col" style="width: 10%">得分</td>
+								<td colspan='5' rowspan='1' scope="col" style="text-align: center;width: 40%">检查项</td>
+							</tr>
+							<tr>
+								<td scope="col">总数</td>
+								<td scope="col">合规数</td>
+								<td scope="col">不合规数</td>
+								<td scope="col">手动数</td>
+								<td scope="col">失败数</td>
+							</tr>
+						</thead>
+						<tbody>
+							  							<tr>
+									<td><a href="192.168.10.6(-2272086316179014735).html" name="childrenPath" style='color:#6FB4DF;' title="点击设备名称查看核查的详细结果">192.168.10.6_离线导入_2</a></td>
+									<td style="text-align: center;"><a href="192.168.10.6(-2272086316179014735).html" name="childrenPath" style='color:#6FB4DF;' title="点击IP地址查看核查的详细结果">192.168.10.6</a></td>
+									<td>/数据库/MySql</td>
+									<td style="text-align: center;">23(高危)</td>
+	
+									<td style="text-align: center;">21</td>
+									<td style="text-align: center;">4</td>
+									<td style="text-align: center;">15</td>
+									<td style="text-align: center;">2</td>
+									<td style="text-align: center;">0</td>
+								</tr>
+								 								<tr class='even'>
+									<td><a href="192.168.10.20(-1813923097362362335).html" name="childrenPath" style='color:#6FB4DF;' title="点击设备名称查看核查的详细结果">192.168.10.20_离线导入_2</a></td>
+									<td style="text-align: center;"><a href="192.168.10.20(-1813923097362362335).html" name="childrenPath" style='color:#6FB4DF;' title="点击IP地址查看核查的详细结果">192.168.10.20</a></td>
+									<td>/中间件/Tomcat</td>
+									<td style="text-align: center;">24(高危)</td>
+	
+									<td style="text-align: center;">15</td>
+									<td style="text-align: center;">3</td>
+									<td style="text-align: center;">11</td>
+									<td style="text-align: center;">1</td>
+									<td style="text-align: center;">0</td>
+								</tr>
+								 							<tr>
+									<td><a href="192.168.10.21(-1812076160492556450).html" name="childrenPath" style='color:#6FB4DF;' title="点击设备名称查看核查的详细结果">192.168.10.21_离线导入_2</a></td>
+									<td style="text-align: center;"><a href="192.168.10.21(-1812076160492556450).html" name="childrenPath" style='color:#6FB4DF;' title="点击IP地址查看核查的详细结果">192.168.10.21</a></td>
+									<td>/中间件/Tomcat</td>
+									<td style="text-align: center;">24(高危)</td>
+	
+									<td style="text-align: center;">15</td>
+									<td style="text-align: center;">3</td>
+									<td style="text-align: center;">11</td>
+									<td style="text-align: center;">1</td>
+									<td style="text-align: center;">0</td>
+								</tr>
+								 								<tr class='even'>
+									<td><a href="192.168.10.5(-6443244453152216321).html" name="childrenPath" style='color:#6FB4DF;' title="点击设备名称查看核查的详细结果">192.168.10.5_离线导入_2</a></td>
+									<td style="text-align: center;"><a href="192.168.10.5(-6443244453152216321).html" name="childrenPath" style='color:#6FB4DF;' title="点击IP地址查看核查的详细结果">192.168.10.5</a></td>
+									<td>/数据库/MySql</td>
+									<td style="text-align: center;">35(高危)</td>
+	
+									<td style="text-align: center;">21</td>
+									<td style="text-align: center;">5</td>
+									<td style="text-align: center;">14</td>
+									<td style="text-align: center;">2</td>
+									<td style="text-align: center;">0</td>
+								</tr>
+								 							<tr>
+									<td><a href="192.168.10.27(-361443372401591734).html" name="childrenPath" style='color:#6FB4DF;' title="点击设备名称查看核查的详细结果">192.168.10.27_离线导入_2</a></td>
+									<td style="text-align: center;"><a href="192.168.10.27(-361443372401591734).html" name="childrenPath" style='color:#6FB4DF;' title="点击IP地址查看核查的详细结果">192.168.10.27</a></td>
+									<td>/数据库/MySql</td>
+									<td style="text-align: center;">40(中级)</td>
+	
+									<td style="text-align: center;">21</td>
+									<td style="text-align: center;">5</td>
+									<td style="text-align: center;">14</td>
+									<td style="text-align: center;">2</td>
+									<td style="text-align: center;">0</td>
+								</tr>
+								 								<tr class='even'>
+									<td><a href="192.168.10.20(-5853882641125959506).html" name="childrenPath" style='color:#6FB4DF;' title="点击设备名称查看核查的详细结果">192.168.10.20_离线导入_1</a></td>
+									<td style="text-align: center;"><a href="192.168.10.20(-5853882641125959506).html" name="childrenPath" style='color:#6FB4DF;' title="点击IP地址查看核查的详细结果">192.168.10.20</a></td>
+									<td>/主机/Linux</td>
+									<td style="text-align: center;">49(中级)</td>
+	
+									<td style="text-align: center;">52</td>
+									<td style="text-align: center;">25</td>
+									<td style="text-align: center;">25</td>
+									<td style="text-align: center;">2</td>
+									<td style="text-align: center;">0</td>
+								</tr>
+								 							<tr>
+									<td><a href="192.168.10.26(-5025909930876231342).html" name="childrenPath" style='color:#6FB4DF;' title="点击设备名称查看核查的详细结果">192.168.10.26_离线导入_1</a></td>
+									<td style="text-align: center;"><a href="192.168.10.26(-5025909930876231342).html" name="childrenPath" style='color:#6FB4DF;' title="点击IP地址查看核查的详细结果">192.168.10.26</a></td>
+									<td>/主机/Linux</td>
+									<td style="text-align: center;">53(中级)</td>
+	
+									<td style="text-align: center;">52</td>
+									<td style="text-align: center;">26</td>
+									<td style="text-align: center;">24</td>
+									<td style="text-align: center;">2</td>
+									<td style="text-align: center;">0</td>
+								</tr>
+								 								<tr class='even'>
+									<td><a href="192.168.10.27(-6445701399805646295).html" name="childrenPath" style='color:#6FB4DF;' title="点击设备名称查看核查的详细结果">192.168.10.27_离线导入_1</a></td>
+									<td style="text-align: center;"><a href="192.168.10.27(-6445701399805646295).html" name="childrenPath" style='color:#6FB4DF;' title="点击IP地址查看核查的详细结果">192.168.10.27</a></td>
+									<td>/主机/Linux</td>
+									<td style="text-align: center;">53(中级)</td>
+	
+									<td style="text-align: center;">52</td>
+									<td style="text-align: center;">26</td>
+									<td style="text-align: center;">24</td>
+									<td style="text-align: center;">2</td>
+									<td style="text-align: center;">0</td>
+								</tr>
+								 							<tr>
+									<td><a href="192.168.10.3(-6485496470053134548).html" name="childrenPath" style='color:#6FB4DF;' title="点击设备名称查看核查的详细结果">192.168.10.3_离线导入_1</a></td>
+									<td style="text-align: center;"><a href="192.168.10.3(-6485496470053134548).html" name="childrenPath" style='color:#6FB4DF;' title="点击IP地址查看核查的详细结果">192.168.10.3</a></td>
+									<td>/主机/Linux</td>
+									<td style="text-align: center;">53(中级)</td>
+	
+									<td style="text-align: center;">52</td>
+									<td style="text-align: center;">26</td>
+									<td style="text-align: center;">24</td>
+									<td style="text-align: center;">2</td>
+									<td style="text-align: center;">0</td>
+								</tr>
+								 								<tr class='even'>
+									<td><a href="192.168.10.2(-1405741011650923864).html" name="childrenPath" style='color:#6FB4DF;' title="点击设备名称查看核查的详细结果">192.168.10.2_离线导入_1</a></td>
+									<td style="text-align: center;"><a href="192.168.10.2(-1405741011650923864).html" name="childrenPath" style='color:#6FB4DF;' title="点击IP地址查看核查的详细结果">192.168.10.2</a></td>
+									<td>/主机/Linux</td>
+									<td style="text-align: center;">53(中级)</td>
+	
+									<td style="text-align: center;">52</td>
+									<td style="text-align: center;">26</td>
+									<td style="text-align: center;">24</td>
+									<td style="text-align: center;">2</td>
+									<td style="text-align: center;">0</td>
+								</tr>
+								 							<tr>
+									<td><a href="192.168.10.22(-4317990318831406938).html" name="childrenPath" style='color:#6FB4DF;' title="点击设备名称查看核查的详细结果">192.168.10.22_离线导入_1</a></td>
+									<td style="text-align: center;"><a href="192.168.10.22(-4317990318831406938).html" name="childrenPath" style='color:#6FB4DF;' title="点击IP地址查看核查的详细结果">192.168.10.22</a></td>
+									<td>/主机/Linux</td>
+									<td style="text-align: center;">53(中级)</td>
+	
+									<td style="text-align: center;">52</td>
+									<td style="text-align: center;">26</td>
+									<td style="text-align: center;">24</td>
+									<td style="text-align: center;">2</td>
+									<td style="text-align: center;">0</td>
+								</tr>
+								 								<tr class='even'>
+									<td><a href="192.168.10.5(-9202523164782685867).html" name="childrenPath" style='color:#6FB4DF;' title="点击设备名称查看核查的详细结果">192.168.10.5_离线导入_1</a></td>
+									<td style="text-align: center;"><a href="192.168.10.5(-9202523164782685867).html" name="childrenPath" style='color:#6FB4DF;' title="点击IP地址查看核查的详细结果">192.168.10.5</a></td>
+									<td>/主机/Linux</td>
+									<td style="text-align: center;">53(中级)</td>
+	
+									<td style="text-align: center;">52</td>
+									<td style="text-align: center;">26</td>
+									<td style="text-align: center;">24</td>
+									<td style="text-align: center;">2</td>
+									<td style="text-align: center;">0</td>
+								</tr>
+								 							<tr>
+									<td><a href="192.168.10.23(-3205839720467779423).html" name="childrenPath" style='color:#6FB4DF;' title="点击设备名称查看核查的详细结果">192.168.10.23_离线导入_1</a></td>
+									<td style="text-align: center;"><a href="192.168.10.23(-3205839720467779423).html" name="childrenPath" style='color:#6FB4DF;' title="点击IP地址查看核查的详细结果">192.168.10.23</a></td>
+									<td>/主机/Linux</td>
+									<td style="text-align: center;">53(中级)</td>
+	
+									<td style="text-align: center;">52</td>
+									<td style="text-align: center;">26</td>
+									<td style="text-align: center;">24</td>
+									<td style="text-align: center;">2</td>
+									<td style="text-align: center;">0</td>
+								</tr>
+								 								<tr class='even'>
+									<td><a href="192.168.10.24(-951351563663098487).html" name="childrenPath" style='color:#6FB4DF;' title="点击设备名称查看核查的详细结果">192.168.10.24_离线导入_1</a></td>
+									<td style="text-align: center;"><a href="192.168.10.24(-951351563663098487).html" name="childrenPath" style='color:#6FB4DF;' title="点击IP地址查看核查的详细结果">192.168.10.24</a></td>
+									<td>/主机/Linux</td>
+									<td style="text-align: center;">53(中级)</td>
+	
+									<td style="text-align: center;">52</td>
+									<td style="text-align: center;">26</td>
+									<td style="text-align: center;">24</td>
+									<td style="text-align: center;">2</td>
+									<td style="text-align: center;">0</td>
+								</tr>
+								 							<tr>
+									<td><a href="192.168.10.25(-992225878519822527).html" name="childrenPath" style='color:#6FB4DF;' title="点击设备名称查看核查的详细结果">192.168.10.25_离线导入_1</a></td>
+									<td style="text-align: center;"><a href="192.168.10.25(-992225878519822527).html" name="childrenPath" style='color:#6FB4DF;' title="点击IP地址查看核查的详细结果">192.168.10.25</a></td>
+									<td>/主机/Linux</td>
+									<td style="text-align: center;">53(中级)</td>
+	
+									<td style="text-align: center;">52</td>
+									<td style="text-align: center;">26</td>
+									<td style="text-align: center;">24</td>
+									<td style="text-align: center;">2</td>
+									<td style="text-align: center;">0</td>
+								</tr>
+								 								<tr class='even'>
+									<td><a href="192.168.10.6(-5329940128886653073).html" name="childrenPath" style='color:#6FB4DF;' title="点击设备名称查看核查的详细结果">192.168.10.6_离线导入_1</a></td>
+									<td style="text-align: center;"><a href="192.168.10.6(-5329940128886653073).html" name="childrenPath" style='color:#6FB4DF;' title="点击IP地址查看核查的详细结果">192.168.10.6</a></td>
+									<td>/主机/Linux</td>
+									<td style="text-align: center;">53(中级)</td>
+	
+									<td style="text-align: center;">52</td>
+									<td style="text-align: center;">26</td>
+									<td style="text-align: center;">24</td>
+									<td style="text-align: center;">2</td>
+									<td style="text-align: center;">0</td>
+								</tr>
+								 							<tr>
+									<td><a href="192.168.10.21(-4530567869402067699).html" name="childrenPath" style='color:#6FB4DF;' title="点击设备名称查看核查的详细结果">192.168.10.21_离线导入_1</a></td>
+									<td style="text-align: center;"><a href="192.168.10.21(-4530567869402067699).html" name="childrenPath" style='color:#6FB4DF;' title="点击IP地址查看核查的详细结果">192.168.10.21</a></td>
+									<td>/主机/Linux</td>
+									<td style="text-align: center;">53(中级)</td>
+	
+									<td style="text-align: center;">52</td>
+									<td style="text-align: center;">26</td>
+									<td style="text-align: center;">24</td>
+									<td style="text-align: center;">2</td>
+									<td style="text-align: center;">0</td>
+								</tr>
+								 								<tr class='even'>
+									<td><a href="192.168.10.8(-3908347663814198900).html" name="childrenPath" style='color:#6FB4DF;' title="点击设备名称查看核查的详细结果">192.168.10.8_离线导入_1</a></td>
+									<td style="text-align: center;"><a href="192.168.10.8(-3908347663814198900).html" name="childrenPath" style='color:#6FB4DF;' title="点击IP地址查看核查的详细结果">192.168.10.8</a></td>
+									<td>/主机/Linux</td>
+									<td style="text-align: center;">57(中级)</td>
+	
+									<td style="text-align: center;">52</td>
+									<td style="text-align: center;">27</td>
+									<td style="text-align: center;">23</td>
+									<td style="text-align: center;">2</td>
+									<td style="text-align: center;">0</td>
+								</tr>
+								 							<tr>
+									<td><a href="192.168.10.7(-4314242318915888412).html" name="childrenPath" style='color:#6FB4DF;' title="点击设备名称查看核查的详细结果">192.168.10.7_离线导入_1</a></td>
+									<td style="text-align: center;"><a href="192.168.10.7(-4314242318915888412).html" name="childrenPath" style='color:#6FB4DF;' title="点击IP地址查看核查的详细结果">192.168.10.7</a></td>
+									<td>/主机/Linux</td>
+									<td style="text-align: center;">57(中级)</td>
+	
+									<td style="text-align: center;">52</td>
+									<td style="text-align: center;">27</td>
+									<td style="text-align: center;">23</td>
+									<td style="text-align: center;">2</td>
+									<td style="text-align: center;">0</td>
+								</tr>
+								 								<tr class='even'>
+									<td><a href="192.168.10.26(-6139040556053172498).html" name="childrenPath" style='color:#6FB4DF;' title="点击设备名称查看核查的详细结果">192.168.10.26_离线导入_2</a></td>
+									<td style="text-align: center;"><a href="192.168.10.26(-6139040556053172498).html" name="childrenPath" style='color:#6FB4DF;' title="点击IP地址查看核查的详细结果">192.168.10.26</a></td>
+									<td>/数据库/MySql</td>
+									<td style="text-align: center;">70(中级)</td>
+	
+									<td style="text-align: center;">21</td>
+									<td style="text-align: center;">8</td>
+									<td style="text-align: center;">11</td>
+									<td style="text-align: center;">2</td>
+									<td style="text-align: center;">0</td>
+								</tr>
+								 						</tbody>
+					</table>
+				</div>
+			
+				<h2 class="round-corner">
+					<span id="title5">5.不合规检查项TOP 10</span>
+				</h2>
+				<div class="box">
+	
+					<table class="datagrid">
+						<thead>
+							<tr class="odd">
+								<td scope="col" style="width: 15%">类别</td>
+								<td scope="col" style="width: 20%">编号</td>
+								<td scope="col" style="width: 40%">名称</td>
+								<td scope="col" style="width: 15%">重要级别</td>
+								<td scope="col" style="width: 10%">不合规数</td>
+							</tr>
+						</thead>
+						<tbody>
+							  							<tr>
+									<td>其他配置</td>
+									<td>Linux-50</td>
+									<td>对root为ls、rm设置别名</td>
+									<td style="text-align: center;">低(权重=1)</td>
+									<td style="text-align: center;">14</td>
+								</tr>
+								 								<tr class='even'>
+									<td>其他配置</td>
+									<td>Linux-49</td>
+									<td>历史命令设置 </td>
+									<td style="text-align: center;">中低(权重=3)</td>
+									<td style="text-align: center;">14</td>
+								</tr>
+								 							<tr>
+									<td>网络通信</td>
+									<td>Linux-48</td>
+									<td>更改主机解析地址的顺序</td>
+									<td style="text-align: center;">低(权重=1)</td>
+									<td style="text-align: center;">14</td>
+								</tr>
+								 								<tr class='even'>
+									<td>其他配置</td>
+									<td>Linux-45</td>
+									<td>设置关键文件的属性</td>
+									<td style="text-align: center;">中(权重=5)</td>
+									<td style="text-align: center;">14</td>
+								</tr>
+								 							<tr>
+									<td>认证授权</td>
+									<td>Linux-41</td>
+									<td>使用PAM认证模块禁止wheel组之外的用户su为root</td>
+									<td style="text-align: center;">中高(权重=7)</td>
+									<td style="text-align: center;">14</td>
+								</tr>
+								 								<tr class='even'>
+									<td>口令策略</td>
+									<td>Linux-36</td>
+									<td>口令重复次数限制</td>
+									<td style="text-align: center;">低(权重=1)</td>
+									<td style="text-align: center;">14</td>
+								</tr>
+								 							<tr>
+									<td>文件权限</td>
+									<td>Linux-35</td>
+									<td>日志文件安全</td>
+									<td style="text-align: center;">低(权重=1)</td>
+									<td style="text-align: center;">14</td>
+								</tr>
+								 								<tr class='even'>
+									<td>其他配置</td>
+									<td>Linux-30</td>
+									<td>设置屏幕锁定</td>
+									<td style="text-align: center;">低(权重=1)</td>
+									<td style="text-align: center;">14</td>
+								</tr>
+								 							<tr>
+									<td>文件权限</td>
+									<td>Linux-26</td>
+									<td>禁止ICMP重定向</td>
+									<td style="text-align: center;">中低(权重=4)</td>
+									<td style="text-align: center;">14</td>
+								</tr>
+								 								<tr class='even'>
+									<td>网络通信</td>
+									<td>Linux-23</td>
+									<td>控制远程访问的IP地址</td>
+									<td style="text-align: center;">低(权重=1)</td>
+									<td style="text-align: center;">14</td>
+								</tr>
+								 						</tbody>
+					</table>
+				</div>
+			
+				<h2 class="round-corner">
+					<span id="title6">6.不合规检查项汇总</span>
+				</h2>
+				<div class="box">
+	
+					<table class="datagrid">
+						<thead>
+							<tr class="odd">
+								<td scope="col" style="width: 10%">类别</td>
+								<td scope="col" style="width: 10%">编号</td>
+								<td scope="col" style="width: 15%">名称</td>
+								<td scope="col" style="width: 10%">重要级别</td>
+								<td scope="col" style="width: 5%">合规统计</td>
+								<td scope="col" style="width: 5%">合规率</td>
+								<td scope="col" style="width: 15%">不合规主机</td>
+							</tr>
+						</thead>
+						<tbody>
+							
+							<tr class='even'>
+								<td colspan='1' rowspan='7' align="left">帐号管理</td>
+								<td align="left">Mysql-16</td>
+								<td align="left">检查是否配置不同用户不同账号</td>
+								<td style="text-align: center;">中低(权重=3)</td>
+								<td style="text-align: center;">1/4</td>
+								<td style="text-align: center;">25.00%</td>
+								<td align="left">
+											<a href="192.168.10.27(-361443372401591734).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_2</a></br>
+											<a href="192.168.10.5(-6443244453152216321).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_2</a></br>
+											<a href="192.168.10.6(-2272086316179014735).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_2</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Mysql-13</td>
+								<td align="left">避免弱口令</td>
+								<td style="text-align: center;">中(权重=5)</td>
+								<td style="text-align: center;">1/4</td>
+								<td style="text-align: center;">25.00%</td>
+								<td align="left">
+											<a href="192.168.10.27(-361443372401591734).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_2</a></br>
+											<a href="192.168.10.5(-6443244453152216321).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_2</a></br>
+											<a href="192.168.10.6(-2272086316179014735).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_2</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Mysql-9</td>
+								<td align="left">检查是否更改root用户</td>
+								<td style="text-align: center;">低(权重=1)</td>
+								<td style="text-align: center;">0/4</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.26(-6139040556053172498).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_2</a></br>
+											<a href="192.168.10.27(-361443372401591734).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_2</a></br>
+											<a href="192.168.10.5(-6443244453152216321).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_2</a></br>
+											<a href="192.168.10.6(-2272086316179014735).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_2</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Tomcat-25</td>
+								<td align="left">服务账号管理-Linux</td>
+								<td style="text-align: center;">中低(权重=3)</td>
+								<td style="text-align: center;">0/2</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.20(-1813923097362362335).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_2</a></br>
+											<a href="192.168.10.21(-1812076160492556450).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_2</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Tomcat-13</td>
+								<td align="left">按照用户分配账号-Linux</td>
+								<td style="text-align: center;">低(权重=1)</td>
+								<td style="text-align: center;">0/2</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.20(-1813923097362362335).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_2</a></br>
+											<a href="192.168.10.21(-1812076160492556450).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_2</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Linux-15</td>
+								<td align="left">删除无关帐号</td>
+								<td style="text-align: center;">低(权重=1)</td>
+								<td style="text-align: center;">0/14</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.8(-3908347663814198900).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.8_192.168.10.8_离线导入_1</a></br>
+											<a href="192.168.10.26(-5025909930876231342).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_1</a></br>
+											<a href="192.168.10.27(-6445701399805646295).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_1</a></br>
+											<a href="192.168.10.3(-6485496470053134548).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.3_192.168.10.3_离线导入_1</a></br>
+											<a href="192.168.10.2(-1405741011650923864).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.2_192.168.10.2_离线导入_1</a></br>
+											<a href="192.168.10.22(-4317990318831406938).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.22_192.168.10.22_离线导入_1</a></br>
+											<a href="192.168.10.5(-9202523164782685867).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_1</a></br>
+											<a href="192.168.10.23(-3205839720467779423).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.23_192.168.10.23_离线导入_1</a></br>
+											<a href="192.168.10.24(-951351563663098487).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.24_192.168.10.24_离线导入_1</a></br>
+											<a href="192.168.10.7(-4314242318915888412).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.7_192.168.10.7_离线导入_1</a></br>
+											<a href="192.168.10.25(-992225878519822527).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.25_192.168.10.25_离线导入_1</a></br>
+											<a href="192.168.10.6(-5329940128886653073).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_1</a></br>
+											<a href="192.168.10.20(-5853882641125959506).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_1</a></br>
+											<a href="192.168.10.21(-4530567869402067699).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_1</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Mysql-7</td>
+								<td align="left">检查是否删除无关或匿名帐号</td>
+								<td style="text-align: center;">中(权重=5)</td>
+								<td style="text-align: center;">1/4</td>
+								<td style="text-align: center;">25.00%</td>
+								<td align="left">
+											<a href="192.168.10.27(-361443372401591734).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_2</a></br>
+											<a href="192.168.10.5(-6443244453152216321).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_2</a></br>
+											<a href="192.168.10.6(-2272086316179014735).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_2</a></br>
+								</td>
+							</tr>
+							<tr>
+								 
+							</tr>
+														
+							<tr class='even'>
+								<td colspan='1' rowspan='6' align="left">口令策略</td>
+								<td align="left">Linux-9</td>
+								<td align="left">口令复杂度</td>
+								<td style="text-align: center;">中高(权重=7)</td>
+								<td style="text-align: center;">0/14</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.8(-3908347663814198900).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.8_192.168.10.8_离线导入_1</a></br>
+											<a href="192.168.10.26(-5025909930876231342).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_1</a></br>
+											<a href="192.168.10.27(-6445701399805646295).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_1</a></br>
+											<a href="192.168.10.3(-6485496470053134548).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.3_192.168.10.3_离线导入_1</a></br>
+											<a href="192.168.10.2(-1405741011650923864).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.2_192.168.10.2_离线导入_1</a></br>
+											<a href="192.168.10.22(-4317990318831406938).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.22_192.168.10.22_离线导入_1</a></br>
+											<a href="192.168.10.5(-9202523164782685867).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_1</a></br>
+											<a href="192.168.10.23(-3205839720467779423).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.23_192.168.10.23_离线导入_1</a></br>
+											<a href="192.168.10.24(-951351563663098487).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.24_192.168.10.24_离线导入_1</a></br>
+											<a href="192.168.10.7(-4314242318915888412).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.7_192.168.10.7_离线导入_1</a></br>
+											<a href="192.168.10.25(-992225878519822527).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.25_192.168.10.25_离线导入_1</a></br>
+											<a href="192.168.10.6(-5329940128886653073).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_1</a></br>
+											<a href="192.168.10.20(-5853882641125959506).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_1</a></br>
+											<a href="192.168.10.21(-4530567869402067699).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_1</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Linux-1</td>
+								<td align="left">口令锁定策略</td>
+								<td style="text-align: center;">低(权重=1)</td>
+								<td style="text-align: center;">0/14</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.8(-3908347663814198900).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.8_192.168.10.8_离线导入_1</a></br>
+											<a href="192.168.10.26(-5025909930876231342).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_1</a></br>
+											<a href="192.168.10.27(-6445701399805646295).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_1</a></br>
+											<a href="192.168.10.3(-6485496470053134548).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.3_192.168.10.3_离线导入_1</a></br>
+											<a href="192.168.10.2(-1405741011650923864).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.2_192.168.10.2_离线导入_1</a></br>
+											<a href="192.168.10.22(-4317990318831406938).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.22_192.168.10.22_离线导入_1</a></br>
+											<a href="192.168.10.5(-9202523164782685867).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_1</a></br>
+											<a href="192.168.10.23(-3205839720467779423).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.23_192.168.10.23_离线导入_1</a></br>
+											<a href="192.168.10.24(-951351563663098487).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.24_192.168.10.24_离线导入_1</a></br>
+											<a href="192.168.10.7(-4314242318915888412).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.7_192.168.10.7_离线导入_1</a></br>
+											<a href="192.168.10.25(-992225878519822527).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.25_192.168.10.25_离线导入_1</a></br>
+											<a href="192.168.10.6(-5329940128886653073).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_1</a></br>
+											<a href="192.168.10.20(-5853882641125959506).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_1</a></br>
+											<a href="192.168.10.21(-4530567869402067699).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_1</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Mysql-21</td>
+								<td align="left">可信IP地址访问控制</td>
+								<td style="text-align: center;">中低(权重=3)</td>
+								<td style="text-align: center;">2/4</td>
+								<td style="text-align: center;">50.00%</td>
+								<td align="left">
+											<a href="192.168.10.5(-6443244453152216321).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_2</a></br>
+											<a href="192.168.10.6(-2272086316179014735).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_2</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Linux-7</td>
+								<td align="left">口令生存期</td>
+								<td style="text-align: center;">中高(权重=7)</td>
+								<td style="text-align: center;">0/14</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.8(-3908347663814198900).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.8_192.168.10.8_离线导入_1</a></br>
+											<a href="192.168.10.26(-5025909930876231342).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_1</a></br>
+											<a href="192.168.10.27(-6445701399805646295).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_1</a></br>
+											<a href="192.168.10.3(-6485496470053134548).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.3_192.168.10.3_离线导入_1</a></br>
+											<a href="192.168.10.2(-1405741011650923864).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.2_192.168.10.2_离线导入_1</a></br>
+											<a href="192.168.10.22(-4317990318831406938).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.22_192.168.10.22_离线导入_1</a></br>
+											<a href="192.168.10.5(-9202523164782685867).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_1</a></br>
+											<a href="192.168.10.23(-3205839720467779423).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.23_192.168.10.23_离线导入_1</a></br>
+											<a href="192.168.10.24(-951351563663098487).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.24_192.168.10.24_离线导入_1</a></br>
+											<a href="192.168.10.7(-4314242318915888412).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.7_192.168.10.7_离线导入_1</a></br>
+											<a href="192.168.10.25(-992225878519822527).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.25_192.168.10.25_离线导入_1</a></br>
+											<a href="192.168.10.6(-5329940128886653073).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_1</a></br>
+											<a href="192.168.10.20(-5853882641125959506).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_1</a></br>
+											<a href="192.168.10.21(-4530567869402067699).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_1</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Linux-36</td>
+								<td align="left">口令重复次数限制</td>
+								<td style="text-align: center;">低(权重=1)</td>
+								<td style="text-align: center;">0/14</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.8(-3908347663814198900).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.8_192.168.10.8_离线导入_1</a></br>
+											<a href="192.168.10.26(-5025909930876231342).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_1</a></br>
+											<a href="192.168.10.27(-6445701399805646295).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_1</a></br>
+											<a href="192.168.10.3(-6485496470053134548).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.3_192.168.10.3_离线导入_1</a></br>
+											<a href="192.168.10.2(-1405741011650923864).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.2_192.168.10.2_离线导入_1</a></br>
+											<a href="192.168.10.22(-4317990318831406938).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.22_192.168.10.22_离线导入_1</a></br>
+											<a href="192.168.10.5(-9202523164782685867).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_1</a></br>
+											<a href="192.168.10.23(-3205839720467779423).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.23_192.168.10.23_离线导入_1</a></br>
+											<a href="192.168.10.24(-951351563663098487).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.24_192.168.10.24_离线导入_1</a></br>
+											<a href="192.168.10.7(-4314242318915888412).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.7_192.168.10.7_离线导入_1</a></br>
+											<a href="192.168.10.25(-992225878519822527).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.25_192.168.10.25_离线导入_1</a></br>
+											<a href="192.168.10.6(-5329940128886653073).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_1</a></br>
+											<a href="192.168.10.20(-5853882641125959506).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_1</a></br>
+											<a href="192.168.10.21(-4530567869402067699).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_1</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Tomcat-11</td>
+								<td align="left">配置用户最小权限-Linux</td>
+								<td style="text-align: center;">低(权重=1)</td>
+								<td style="text-align: center;">0/2</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.20(-1813923097362362335).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_2</a></br>
+											<a href="192.168.10.21(-1812076160492556450).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_2</a></br>
+								</td>
+							</tr>
+							<tr>
+								 
+							</tr>
+														
+							<tr class='even'>
+								<td colspan='1' rowspan='3' align="left">认证授权</td>
+								<td align="left">Mysql-4</td>
+								<td align="left">检查是否配置日志功能</td>
+								<td style="text-align: center;">中(权重=5)</td>
+								<td style="text-align: center;">3/4</td>
+								<td style="text-align: center;">75.00%</td>
+								<td align="left">
+											<a href="192.168.10.6(-2272086316179014735).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_2</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Linux-41</td>
+								<td align="left">使用PAM认证模块禁止wheel组之外的用户su为root</td>
+								<td style="text-align: center;">中高(权重=7)</td>
+								<td style="text-align: center;">0/14</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.8(-3908347663814198900).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.8_192.168.10.8_离线导入_1</a></br>
+											<a href="192.168.10.26(-5025909930876231342).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_1</a></br>
+											<a href="192.168.10.27(-6445701399805646295).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_1</a></br>
+											<a href="192.168.10.3(-6485496470053134548).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.3_192.168.10.3_离线导入_1</a></br>
+											<a href="192.168.10.2(-1405741011650923864).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.2_192.168.10.2_离线导入_1</a></br>
+											<a href="192.168.10.22(-4317990318831406938).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.22_192.168.10.22_离线导入_1</a></br>
+											<a href="192.168.10.5(-9202523164782685867).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_1</a></br>
+											<a href="192.168.10.23(-3205839720467779423).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.23_192.168.10.23_离线导入_1</a></br>
+											<a href="192.168.10.24(-951351563663098487).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.24_192.168.10.24_离线导入_1</a></br>
+											<a href="192.168.10.7(-4314242318915888412).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.7_192.168.10.7_离线导入_1</a></br>
+											<a href="192.168.10.25(-992225878519822527).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.25_192.168.10.25_离线导入_1</a></br>
+											<a href="192.168.10.6(-5329940128886653073).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_1</a></br>
+											<a href="192.168.10.20(-5853882641125959506).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_1</a></br>
+											<a href="192.168.10.21(-4530567869402067699).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_1</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Tomcat-19</td>
+								<td align="left">记录用户登录行为-Linux</td>
+								<td style="text-align: center;">中(权重=5)</td>
+								<td style="text-align: center;">0/2</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.20(-1813923097362362335).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_2</a></br>
+											<a href="192.168.10.21(-1812076160492556450).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_2</a></br>
+								</td>
+							</tr>
+							<tr>
+								 
+							</tr>
+														
+							<tr class='even'>
+								<td colspan='1' rowspan='6' align="left">系统服务</td>
+								<td align="left">Linux-21</td>
+								<td align="left">配置NFS服务限制</td>
+								<td style="text-align: center;">低(权重=1)</td>
+								<td style="text-align: center;">0/14</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.8(-3908347663814198900).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.8_192.168.10.8_离线导入_1</a></br>
+											<a href="192.168.10.26(-5025909930876231342).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_1</a></br>
+											<a href="192.168.10.27(-6445701399805646295).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_1</a></br>
+											<a href="192.168.10.3(-6485496470053134548).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.3_192.168.10.3_离线导入_1</a></br>
+											<a href="192.168.10.2(-1405741011650923864).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.2_192.168.10.2_离线导入_1</a></br>
+											<a href="192.168.10.22(-4317990318831406938).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.22_192.168.10.22_离线导入_1</a></br>
+											<a href="192.168.10.5(-9202523164782685867).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_1</a></br>
+											<a href="192.168.10.23(-3205839720467779423).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.23_192.168.10.23_离线导入_1</a></br>
+											<a href="192.168.10.24(-951351563663098487).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.24_192.168.10.24_离线导入_1</a></br>
+											<a href="192.168.10.7(-4314242318915888412).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.7_192.168.10.7_离线导入_1</a></br>
+											<a href="192.168.10.25(-992225878519822527).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.25_192.168.10.25_离线导入_1</a></br>
+											<a href="192.168.10.6(-5329940128886653073).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_1</a></br>
+											<a href="192.168.10.20(-5853882641125959506).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_1</a></br>
+											<a href="192.168.10.21(-4530567869402067699).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_1</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Linux-3</td>
+								<td align="left">限制root用户SSH远程登录</td>
+								<td style="text-align: center;">中高(权重=7)</td>
+								<td style="text-align: center;">0/14</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.8(-3908347663814198900).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.8_192.168.10.8_离线导入_1</a></br>
+											<a href="192.168.10.26(-5025909930876231342).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_1</a></br>
+											<a href="192.168.10.27(-6445701399805646295).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_1</a></br>
+											<a href="192.168.10.3(-6485496470053134548).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.3_192.168.10.3_离线导入_1</a></br>
+											<a href="192.168.10.2(-1405741011650923864).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.2_192.168.10.2_离线导入_1</a></br>
+											<a href="192.168.10.22(-4317990318831406938).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.22_192.168.10.22_离线导入_1</a></br>
+											<a href="192.168.10.5(-9202523164782685867).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_1</a></br>
+											<a href="192.168.10.23(-3205839720467779423).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.23_192.168.10.23_离线导入_1</a></br>
+											<a href="192.168.10.24(-951351563663098487).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.24_192.168.10.24_离线导入_1</a></br>
+											<a href="192.168.10.7(-4314242318915888412).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.7_192.168.10.7_离线导入_1</a></br>
+											<a href="192.168.10.25(-992225878519822527).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.25_192.168.10.25_离线导入_1</a></br>
+											<a href="192.168.10.6(-5329940128886653073).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_1</a></br>
+											<a href="192.168.10.20(-5853882641125959506).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_1</a></br>
+											<a href="192.168.10.21(-4530567869402067699).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_1</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Linux-11</td>
+								<td align="left">限制root用户TELNET远程登录</td>
+								<td style="text-align: center;">中高(权重=7)</td>
+								<td style="text-align: center;">13/14</td>
+								<td style="text-align: center;">92.86%</td>
+								<td align="left">
+											<a href="192.168.10.20(-5853882641125959506).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_1</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Linux-4</td>
+								<td align="left">使用SSH协议进行远程维护</td>
+								<td style="text-align: center;">中高(权重=7)</td>
+								<td style="text-align: center;">13/14</td>
+								<td style="text-align: center;">92.86%</td>
+								<td align="left">
+											<a href="192.168.10.20(-5853882641125959506).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_1</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Linux-14</td>
+								<td align="left">修改SSH的Banner信息</td>
+								<td style="text-align: center;">低(权重=2)</td>
+								<td style="text-align: center;">0/14</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.8(-3908347663814198900).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.8_192.168.10.8_离线导入_1</a></br>
+											<a href="192.168.10.26(-5025909930876231342).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_1</a></br>
+											<a href="192.168.10.27(-6445701399805646295).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_1</a></br>
+											<a href="192.168.10.3(-6485496470053134548).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.3_192.168.10.3_离线导入_1</a></br>
+											<a href="192.168.10.2(-1405741011650923864).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.2_192.168.10.2_离线导入_1</a></br>
+											<a href="192.168.10.22(-4317990318831406938).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.22_192.168.10.22_离线导入_1</a></br>
+											<a href="192.168.10.5(-9202523164782685867).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_1</a></br>
+											<a href="192.168.10.23(-3205839720467779423).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.23_192.168.10.23_离线导入_1</a></br>
+											<a href="192.168.10.24(-951351563663098487).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.24_192.168.10.24_离线导入_1</a></br>
+											<a href="192.168.10.7(-4314242318915888412).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.7_192.168.10.7_离线导入_1</a></br>
+											<a href="192.168.10.25(-992225878519822527).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.25_192.168.10.25_离线导入_1</a></br>
+											<a href="192.168.10.6(-5329940128886653073).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_1</a></br>
+											<a href="192.168.10.20(-5853882641125959506).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_1</a></br>
+											<a href="192.168.10.21(-4530567869402067699).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_1</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Tomcat-7</td>
+								<td align="left">HTTP加密协议-Linux</td>
+								<td style="text-align: center;">中(权重=5)</td>
+								<td style="text-align: center;">0/2</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.20(-1813923097362362335).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_2</a></br>
+											<a href="192.168.10.21(-1812076160492556450).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_2</a></br>
+								</td>
+							</tr>
+							<tr>
+								 
+							</tr>
+														
+							<tr class='even'>
+								<td colspan='1' rowspan='20' align="left">文件权限</td>
+								<td align="left">Tomcat-9</td>
+								<td align="left">错误页面重定向-Linux</td>
+								<td style="text-align: center;">低(权重=1)</td>
+								<td style="text-align: center;">0/2</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.20(-1813923097362362335).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_2</a></br>
+											<a href="192.168.10.21(-1812076160492556450).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_2</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Mysql-5</td>
+								<td align="left">检查是否移除test数据库</td>
+								<td style="text-align: center;">低(权重=1)</td>
+								<td style="text-align: center;">0/4</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.26(-6139040556053172498).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_2</a></br>
+											<a href="192.168.10.27(-361443372401591734).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_2</a></br>
+											<a href="192.168.10.5(-6443244453152216321).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_2</a></br>
+											<a href="192.168.10.6(-2272086316179014735).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_2</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Mysql-3</td>
+								<td align="left">检查是否配置ssl_cert的路径</td>
+								<td style="text-align: center;">低(权重=1)</td>
+								<td style="text-align: center;">0/4</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.26(-6139040556053172498).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_2</a></br>
+											<a href="192.168.10.27(-361443372401591734).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_2</a></br>
+											<a href="192.168.10.5(-6443244453152216321).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_2</a></br>
+											<a href="192.168.10.6(-2272086316179014735).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_2</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Mysql-14</td>
+								<td align="left">检查是否存在有通配符的主机信息</td>
+								<td style="text-align: center;">低(权重=1)</td>
+								<td style="text-align: center;">2/4</td>
+								<td style="text-align: center;">50.00%</td>
+								<td align="left">
+											<a href="192.168.10.26(-6139040556053172498).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_2</a></br>
+											<a href="192.168.10.27(-361443372401591734).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_2</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Mysql-2</td>
+								<td align="left">检查是否配置ssl_ca的路径</td>
+								<td style="text-align: center;">低(权重=1)</td>
+								<td style="text-align: center;">0/4</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.26(-6139040556053172498).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_2</a></br>
+											<a href="192.168.10.27(-361443372401591734).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_2</a></br>
+											<a href="192.168.10.5(-6443244453152216321).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_2</a></br>
+											<a href="192.168.10.6(-2272086316179014735).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_2</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Mysql-1</td>
+								<td align="left">检查是否配置ssl_key的路径</td>
+								<td style="text-align: center;">低(权重=1)</td>
+								<td style="text-align: center;">0/4</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.26(-6139040556053172498).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_2</a></br>
+											<a href="192.168.10.27(-361443372401591734).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_2</a></br>
+											<a href="192.168.10.5(-6443244453152216321).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_2</a></br>
+											<a href="192.168.10.6(-2272086316179014735).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_2</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Mysql-11</td>
+								<td align="left">检查是否设置最大连接数</td>
+								<td style="text-align: center;">低(权重=1)</td>
+								<td style="text-align: center;">0/4</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.26(-6139040556053172498).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_2</a></br>
+											<a href="192.168.10.27(-361443372401591734).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_2</a></br>
+											<a href="192.168.10.5(-6443244453152216321).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_2</a></br>
+											<a href="192.168.10.6(-2272086316179014735).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_2</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Mysql-10</td>
+								<td align="left">检查是否使用ssl连接</td>
+								<td style="text-align: center;">低(权重=1)</td>
+								<td style="text-align: center;">0/4</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.26(-6139040556053172498).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_2</a></br>
+											<a href="192.168.10.27(-361443372401591734).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_2</a></br>
+											<a href="192.168.10.5(-6443244453152216321).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_2</a></br>
+											<a href="192.168.10.6(-2272086316179014735).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_2</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Linux-5</td>
+								<td align="left">文件与目录缺省权限控制</td>
+								<td style="text-align: center;">中高(权重=7)</td>
+								<td style="text-align: center;">0/14</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.8(-3908347663814198900).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.8_192.168.10.8_离线导入_1</a></br>
+											<a href="192.168.10.26(-5025909930876231342).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_1</a></br>
+											<a href="192.168.10.27(-6445701399805646295).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_1</a></br>
+											<a href="192.168.10.3(-6485496470053134548).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.3_192.168.10.3_离线导入_1</a></br>
+											<a href="192.168.10.2(-1405741011650923864).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.2_192.168.10.2_离线导入_1</a></br>
+											<a href="192.168.10.22(-4317990318831406938).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.22_192.168.10.22_离线导入_1</a></br>
+											<a href="192.168.10.5(-9202523164782685867).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_1</a></br>
+											<a href="192.168.10.23(-3205839720467779423).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.23_192.168.10.23_离线导入_1</a></br>
+											<a href="192.168.10.24(-951351563663098487).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.24_192.168.10.24_离线导入_1</a></br>
+											<a href="192.168.10.7(-4314242318915888412).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.7_192.168.10.7_离线导入_1</a></br>
+											<a href="192.168.10.25(-992225878519822527).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.25_192.168.10.25_离线导入_1</a></br>
+											<a href="192.168.10.6(-5329940128886653073).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_1</a></br>
+											<a href="192.168.10.20(-5853882641125959506).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_1</a></br>
+											<a href="192.168.10.21(-4530567869402067699).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_1</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Tomcat-17</td>
+								<td align="left">禁止目录列出-Linux</td>
+								<td style="text-align: center;">低(权重=1)</td>
+								<td style="text-align: center;">0/2</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.20(-1813923097362362335).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_2</a></br>
+											<a href="192.168.10.21(-1812076160492556450).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_2</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Tomcat-5</td>
+								<td align="left">定时登出-Linux</td>
+								<td style="text-align: center;">低(权重=1)</td>
+								<td style="text-align: center;">0/2</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.20(-1813923097362362335).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_2</a></br>
+											<a href="192.168.10.21(-1812076160492556450).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_2</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Tomcat-27</td>
+								<td align="left">更改系统Banner信息-Linux</td>
+								<td style="text-align: center;">低(权重=1)</td>
+								<td style="text-align: center;">0/2</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.20(-1813923097362362335).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_2</a></br>
+											<a href="192.168.10.21(-1812076160492556450).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_2</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Tomcat-15</td>
+								<td align="left">更改默认管理端口-Linux</td>
+								<td style="text-align: center;">中低(权重=3)</td>
+								<td style="text-align: center;">0/2</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.20(-1813923097362362335).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_2</a></br>
+											<a href="192.168.10.21(-1812076160492556450).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_2</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Linux-35</td>
+								<td align="left">日志文件安全</td>
+								<td style="text-align: center;">低(权重=1)</td>
+								<td style="text-align: center;">0/14</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.8(-3908347663814198900).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.8_192.168.10.8_离线导入_1</a></br>
+											<a href="192.168.10.26(-5025909930876231342).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_1</a></br>
+											<a href="192.168.10.27(-6445701399805646295).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_1</a></br>
+											<a href="192.168.10.3(-6485496470053134548).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.3_192.168.10.3_离线导入_1</a></br>
+											<a href="192.168.10.2(-1405741011650923864).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.2_192.168.10.2_离线导入_1</a></br>
+											<a href="192.168.10.22(-4317990318831406938).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.22_192.168.10.22_离线导入_1</a></br>
+											<a href="192.168.10.5(-9202523164782685867).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_1</a></br>
+											<a href="192.168.10.23(-3205839720467779423).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.23_192.168.10.23_离线导入_1</a></br>
+											<a href="192.168.10.24(-951351563663098487).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.24_192.168.10.24_离线导入_1</a></br>
+											<a href="192.168.10.7(-4314242318915888412).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.7_192.168.10.7_离线导入_1</a></br>
+											<a href="192.168.10.25(-992225878519822527).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.25_192.168.10.25_离线导入_1</a></br>
+											<a href="192.168.10.6(-5329940128886653073).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_1</a></br>
+											<a href="192.168.10.20(-5853882641125959506).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_1</a></br>
+											<a href="192.168.10.21(-4530567869402067699).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_1</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Mysql-19</td>
+								<td align="left">检查是否配置禁止网络连接</td>
+								<td style="text-align: center;">中低(权重=3)</td>
+								<td style="text-align: center;">0/4</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.26(-6139040556053172498).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_2</a></br>
+											<a href="192.168.10.27(-361443372401591734).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_2</a></br>
+											<a href="192.168.10.5(-6443244453152216321).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_2</a></br>
+											<a href="192.168.10.6(-2272086316179014735).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_2</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Linux-26</td>
+								<td align="left">禁止ICMP重定向</td>
+								<td style="text-align: center;">中低(权重=4)</td>
+								<td style="text-align: center;">0/14</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.8(-3908347663814198900).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.8_192.168.10.8_离线导入_1</a></br>
+											<a href="192.168.10.26(-5025909930876231342).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_1</a></br>
+											<a href="192.168.10.27(-6445701399805646295).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_1</a></br>
+											<a href="192.168.10.3(-6485496470053134548).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.3_192.168.10.3_离线导入_1</a></br>
+											<a href="192.168.10.2(-1405741011650923864).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.2_192.168.10.2_离线导入_1</a></br>
+											<a href="192.168.10.22(-4317990318831406938).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.22_192.168.10.22_离线导入_1</a></br>
+											<a href="192.168.10.5(-9202523164782685867).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_1</a></br>
+											<a href="192.168.10.23(-3205839720467779423).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.23_192.168.10.23_离线导入_1</a></br>
+											<a href="192.168.10.24(-951351563663098487).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.24_192.168.10.24_离线导入_1</a></br>
+											<a href="192.168.10.7(-4314242318915888412).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.7_192.168.10.7_离线导入_1</a></br>
+											<a href="192.168.10.25(-992225878519822527).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.25_192.168.10.25_离线导入_1</a></br>
+											<a href="192.168.10.6(-5329940128886653073).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_1</a></br>
+											<a href="192.168.10.20(-5853882641125959506).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_1</a></br>
+											<a href="192.168.10.21(-4530567869402067699).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_1</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Linux-16</td>
+								<td align="left">配置用户最小授权</td>
+								<td style="text-align: center;">中(权重=5)</td>
+								<td style="text-align: center;">0/14</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.8(-3908347663814198900).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.8_192.168.10.8_离线导入_1</a></br>
+											<a href="192.168.10.26(-5025909930876231342).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_1</a></br>
+											<a href="192.168.10.27(-6445701399805646295).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_1</a></br>
+											<a href="192.168.10.3(-6485496470053134548).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.3_192.168.10.3_离线导入_1</a></br>
+											<a href="192.168.10.2(-1405741011650923864).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.2_192.168.10.2_离线导入_1</a></br>
+											<a href="192.168.10.22(-4317990318831406938).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.22_192.168.10.22_离线导入_1</a></br>
+											<a href="192.168.10.5(-9202523164782685867).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_1</a></br>
+											<a href="192.168.10.23(-3205839720467779423).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.23_192.168.10.23_离线导入_1</a></br>
+											<a href="192.168.10.24(-951351563663098487).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.24_192.168.10.24_离线导入_1</a></br>
+											<a href="192.168.10.7(-4314242318915888412).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.7_192.168.10.7_离线导入_1</a></br>
+											<a href="192.168.10.25(-992225878519822527).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.25_192.168.10.25_离线导入_1</a></br>
+											<a href="192.168.10.6(-5329940128886653073).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_1</a></br>
+											<a href="192.168.10.20(-5853882641125959506).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_1</a></br>
+											<a href="192.168.10.21(-4530567869402067699).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_1</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Mysql-6</td>
+								<td align="left">检查是否配置禁止自动创建用户自动授权</td>
+								<td style="text-align: center;">低(权重=1)</td>
+								<td style="text-align: center;">0/4</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.26(-6139040556053172498).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_2</a></br>
+											<a href="192.168.10.27(-361443372401591734).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_2</a></br>
+											<a href="192.168.10.5(-6443244453152216321).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_2</a></br>
+											<a href="192.168.10.6(-2272086316179014735).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_2</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Mysql-17</td>
+								<td align="left">检查是否禁止远程下载文件</td>
+								<td style="text-align: center;">低(权重=1)</td>
+								<td style="text-align: center;">0/4</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.26(-6139040556053172498).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_2</a></br>
+											<a href="192.168.10.27(-361443372401591734).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_2</a></br>
+											<a href="192.168.10.5(-6443244453152216321).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_2</a></br>
+											<a href="192.168.10.6(-2272086316179014735).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_2</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Tomcat-22</td>
+								<td align="left">连接数设置-Linux</td>
+								<td style="text-align: center;">中低(权重=3)</td>
+								<td style="text-align: center;">0/2</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.20(-1813923097362362335).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_2</a></br>
+											<a href="192.168.10.21(-1812076160492556450).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_2</a></br>
+								</td>
+							</tr>
+							<tr>
+								 
+							</tr>
+														
+							<tr class='even'>
+								<td colspan='1' rowspan='2' align="left">日志审计</td>
+								<td align="left">Linux-17</td>
+								<td align="left">记录安全事件日志</td>
+								<td style="text-align: center;">低(权重=1)</td>
+								<td style="text-align: center;">0/14</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.8(-3908347663814198900).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.8_192.168.10.8_离线导入_1</a></br>
+											<a href="192.168.10.26(-5025909930876231342).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_1</a></br>
+											<a href="192.168.10.27(-6445701399805646295).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_1</a></br>
+											<a href="192.168.10.3(-6485496470053134548).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.3_192.168.10.3_离线导入_1</a></br>
+											<a href="192.168.10.2(-1405741011650923864).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.2_192.168.10.2_离线导入_1</a></br>
+											<a href="192.168.10.22(-4317990318831406938).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.22_192.168.10.22_离线导入_1</a></br>
+											<a href="192.168.10.5(-9202523164782685867).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_1</a></br>
+											<a href="192.168.10.23(-3205839720467779423).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.23_192.168.10.23_离线导入_1</a></br>
+											<a href="192.168.10.24(-951351563663098487).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.24_192.168.10.24_离线导入_1</a></br>
+											<a href="192.168.10.7(-4314242318915888412).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.7_192.168.10.7_离线导入_1</a></br>
+											<a href="192.168.10.25(-992225878519822527).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.25_192.168.10.25_离线导入_1</a></br>
+											<a href="192.168.10.6(-5329940128886653073).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_1</a></br>
+											<a href="192.168.10.20(-5853882641125959506).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_1</a></br>
+											<a href="192.168.10.21(-4530567869402067699).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_1</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Linux-13</td>
+								<td align="left">启用远程日志功能</td>
+								<td style="text-align: center;">低(权重=1)</td>
+								<td style="text-align: center;">0/14</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.8(-3908347663814198900).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.8_192.168.10.8_离线导入_1</a></br>
+											<a href="192.168.10.26(-5025909930876231342).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_1</a></br>
+											<a href="192.168.10.27(-6445701399805646295).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_1</a></br>
+											<a href="192.168.10.3(-6485496470053134548).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.3_192.168.10.3_离线导入_1</a></br>
+											<a href="192.168.10.2(-1405741011650923864).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.2_192.168.10.2_离线导入_1</a></br>
+											<a href="192.168.10.22(-4317990318831406938).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.22_192.168.10.22_离线导入_1</a></br>
+											<a href="192.168.10.5(-9202523164782685867).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_1</a></br>
+											<a href="192.168.10.23(-3205839720467779423).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.23_192.168.10.23_离线导入_1</a></br>
+											<a href="192.168.10.24(-951351563663098487).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.24_192.168.10.24_离线导入_1</a></br>
+											<a href="192.168.10.7(-4314242318915888412).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.7_192.168.10.7_离线导入_1</a></br>
+											<a href="192.168.10.25(-992225878519822527).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.25_192.168.10.25_离线导入_1</a></br>
+											<a href="192.168.10.6(-5329940128886653073).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_1</a></br>
+											<a href="192.168.10.20(-5853882641125959506).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_1</a></br>
+											<a href="192.168.10.21(-4530567869402067699).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_1</a></br>
+								</td>
+							</tr>
+							<tr>
+								 
+							</tr>
+														
+							<tr class='even'>
+								<td colspan='1' rowspan='2' align="left">网络通信</td>
+								<td align="left">Linux-23</td>
+								<td align="left">控制远程访问的IP地址</td>
+								<td style="text-align: center;">低(权重=1)</td>
+								<td style="text-align: center;">0/14</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.8(-3908347663814198900).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.8_192.168.10.8_离线导入_1</a></br>
+											<a href="192.168.10.26(-5025909930876231342).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_1</a></br>
+											<a href="192.168.10.27(-6445701399805646295).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_1</a></br>
+											<a href="192.168.10.3(-6485496470053134548).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.3_192.168.10.3_离线导入_1</a></br>
+											<a href="192.168.10.2(-1405741011650923864).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.2_192.168.10.2_离线导入_1</a></br>
+											<a href="192.168.10.22(-4317990318831406938).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.22_192.168.10.22_离线导入_1</a></br>
+											<a href="192.168.10.5(-9202523164782685867).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_1</a></br>
+											<a href="192.168.10.23(-3205839720467779423).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.23_192.168.10.23_离线导入_1</a></br>
+											<a href="192.168.10.24(-951351563663098487).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.24_192.168.10.24_离线导入_1</a></br>
+											<a href="192.168.10.7(-4314242318915888412).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.7_192.168.10.7_离线导入_1</a></br>
+											<a href="192.168.10.25(-992225878519822527).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.25_192.168.10.25_离线导入_1</a></br>
+											<a href="192.168.10.6(-5329940128886653073).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_1</a></br>
+											<a href="192.168.10.20(-5853882641125959506).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_1</a></br>
+											<a href="192.168.10.21(-4530567869402067699).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_1</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Linux-48</td>
+								<td align="left">更改主机解析地址的顺序</td>
+								<td style="text-align: center;">低(权重=1)</td>
+								<td style="text-align: center;">0/14</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.8(-3908347663814198900).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.8_192.168.10.8_离线导入_1</a></br>
+											<a href="192.168.10.26(-5025909930876231342).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_1</a></br>
+											<a href="192.168.10.27(-6445701399805646295).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_1</a></br>
+											<a href="192.168.10.3(-6485496470053134548).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.3_192.168.10.3_离线导入_1</a></br>
+											<a href="192.168.10.2(-1405741011650923864).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.2_192.168.10.2_离线导入_1</a></br>
+											<a href="192.168.10.22(-4317990318831406938).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.22_192.168.10.22_离线导入_1</a></br>
+											<a href="192.168.10.5(-9202523164782685867).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_1</a></br>
+											<a href="192.168.10.23(-3205839720467779423).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.23_192.168.10.23_离线导入_1</a></br>
+											<a href="192.168.10.24(-951351563663098487).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.24_192.168.10.24_离线导入_1</a></br>
+											<a href="192.168.10.7(-4314242318915888412).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.7_192.168.10.7_离线导入_1</a></br>
+											<a href="192.168.10.25(-992225878519822527).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.25_192.168.10.25_离线导入_1</a></br>
+											<a href="192.168.10.6(-5329940128886653073).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_1</a></br>
+											<a href="192.168.10.20(-5853882641125959506).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_1</a></br>
+											<a href="192.168.10.21(-4530567869402067699).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_1</a></br>
+								</td>
+							</tr>
+							<tr>
+								 
+							</tr>
+														
+							<tr class='even'>
+								<td colspan='1' rowspan='2' align="left">系统漏洞</td>
+								<td align="left">Linux-12</td>
+								<td align="left">系统core dump状态</td>
+								<td style="text-align: center;">中(权重=5)</td>
+								<td style="text-align: center;">0/14</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.8(-3908347663814198900).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.8_192.168.10.8_离线导入_1</a></br>
+											<a href="192.168.10.26(-5025909930876231342).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_1</a></br>
+											<a href="192.168.10.27(-6445701399805646295).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_1</a></br>
+											<a href="192.168.10.3(-6485496470053134548).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.3_192.168.10.3_离线导入_1</a></br>
+											<a href="192.168.10.2(-1405741011650923864).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.2_192.168.10.2_离线导入_1</a></br>
+											<a href="192.168.10.22(-4317990318831406938).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.22_192.168.10.22_离线导入_1</a></br>
+											<a href="192.168.10.5(-9202523164782685867).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_1</a></br>
+											<a href="192.168.10.23(-3205839720467779423).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.23_192.168.10.23_离线导入_1</a></br>
+											<a href="192.168.10.24(-951351563663098487).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.24_192.168.10.24_离线导入_1</a></br>
+											<a href="192.168.10.7(-4314242318915888412).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.7_192.168.10.7_离线导入_1</a></br>
+											<a href="192.168.10.25(-992225878519822527).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.25_192.168.10.25_离线导入_1</a></br>
+											<a href="192.168.10.6(-5329940128886653073).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_1</a></br>
+											<a href="192.168.10.20(-5853882641125959506).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_1</a></br>
+											<a href="192.168.10.21(-4530567869402067699).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_1</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Linux-51</td>
+								<td align="left">禁止存在心血漏洞</td>
+								<td style="text-align: center;">中高(权重=7)</td>
+								<td style="text-align: center;">3/14</td>
+								<td style="text-align: center;">21.43%</td>
+								<td align="left">
+											<a href="192.168.10.26(-5025909930876231342).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_1</a></br>
+											<a href="192.168.10.27(-6445701399805646295).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_1</a></br>
+											<a href="192.168.10.3(-6485496470053134548).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.3_192.168.10.3_离线导入_1</a></br>
+											<a href="192.168.10.2(-1405741011650923864).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.2_192.168.10.2_离线导入_1</a></br>
+											<a href="192.168.10.22(-4317990318831406938).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.22_192.168.10.22_离线导入_1</a></br>
+											<a href="192.168.10.5(-9202523164782685867).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_1</a></br>
+											<a href="192.168.10.23(-3205839720467779423).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.23_192.168.10.23_离线导入_1</a></br>
+											<a href="192.168.10.24(-951351563663098487).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.24_192.168.10.24_离线导入_1</a></br>
+											<a href="192.168.10.25(-992225878519822527).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.25_192.168.10.25_离线导入_1</a></br>
+											<a href="192.168.10.6(-5329940128886653073).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_1</a></br>
+											<a href="192.168.10.21(-4530567869402067699).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_1</a></br>
+								</td>
+							</tr>
+							<tr>
+								 
+							</tr>
+														
+							<tr class='even'>
+								<td colspan='1' rowspan='5' align="left">其他配置</td>
+								<td align="left">Linux-50</td>
+								<td align="left">对root为ls、rm设置别名</td>
+								<td style="text-align: center;">低(权重=1)</td>
+								<td style="text-align: center;">0/14</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.8(-3908347663814198900).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.8_192.168.10.8_离线导入_1</a></br>
+											<a href="192.168.10.26(-5025909930876231342).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_1</a></br>
+											<a href="192.168.10.27(-6445701399805646295).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_1</a></br>
+											<a href="192.168.10.3(-6485496470053134548).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.3_192.168.10.3_离线导入_1</a></br>
+											<a href="192.168.10.2(-1405741011650923864).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.2_192.168.10.2_离线导入_1</a></br>
+											<a href="192.168.10.22(-4317990318831406938).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.22_192.168.10.22_离线导入_1</a></br>
+											<a href="192.168.10.5(-9202523164782685867).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_1</a></br>
+											<a href="192.168.10.23(-3205839720467779423).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.23_192.168.10.23_离线导入_1</a></br>
+											<a href="192.168.10.24(-951351563663098487).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.24_192.168.10.24_离线导入_1</a></br>
+											<a href="192.168.10.7(-4314242318915888412).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.7_192.168.10.7_离线导入_1</a></br>
+											<a href="192.168.10.25(-992225878519822527).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.25_192.168.10.25_离线导入_1</a></br>
+											<a href="192.168.10.6(-5329940128886653073).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_1</a></br>
+											<a href="192.168.10.20(-5853882641125959506).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_1</a></br>
+											<a href="192.168.10.21(-4530567869402067699).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_1</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Linux-30</td>
+								<td align="left">设置屏幕锁定</td>
+								<td style="text-align: center;">低(权重=1)</td>
+								<td style="text-align: center;">0/14</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.8(-3908347663814198900).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.8_192.168.10.8_离线导入_1</a></br>
+											<a href="192.168.10.26(-5025909930876231342).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_1</a></br>
+											<a href="192.168.10.27(-6445701399805646295).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_1</a></br>
+											<a href="192.168.10.3(-6485496470053134548).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.3_192.168.10.3_离线导入_1</a></br>
+											<a href="192.168.10.2(-1405741011650923864).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.2_192.168.10.2_离线导入_1</a></br>
+											<a href="192.168.10.22(-4317990318831406938).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.22_192.168.10.22_离线导入_1</a></br>
+											<a href="192.168.10.5(-9202523164782685867).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_1</a></br>
+											<a href="192.168.10.23(-3205839720467779423).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.23_192.168.10.23_离线导入_1</a></br>
+											<a href="192.168.10.24(-951351563663098487).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.24_192.168.10.24_离线导入_1</a></br>
+											<a href="192.168.10.7(-4314242318915888412).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.7_192.168.10.7_离线导入_1</a></br>
+											<a href="192.168.10.25(-992225878519822527).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.25_192.168.10.25_离线导入_1</a></br>
+											<a href="192.168.10.6(-5329940128886653073).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_1</a></br>
+											<a href="192.168.10.20(-5853882641125959506).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_1</a></br>
+											<a href="192.168.10.21(-4530567869402067699).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_1</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Linux-2</td>
+								<td align="left">登陆超时时间设置</td>
+								<td style="text-align: center;">中高(权重=7)</td>
+								<td style="text-align: center;">0/14</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.8(-3908347663814198900).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.8_192.168.10.8_离线导入_1</a></br>
+											<a href="192.168.10.26(-5025909930876231342).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_1</a></br>
+											<a href="192.168.10.27(-6445701399805646295).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_1</a></br>
+											<a href="192.168.10.3(-6485496470053134548).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.3_192.168.10.3_离线导入_1</a></br>
+											<a href="192.168.10.2(-1405741011650923864).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.2_192.168.10.2_离线导入_1</a></br>
+											<a href="192.168.10.22(-4317990318831406938).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.22_192.168.10.22_离线导入_1</a></br>
+											<a href="192.168.10.5(-9202523164782685867).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_1</a></br>
+											<a href="192.168.10.23(-3205839720467779423).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.23_192.168.10.23_离线导入_1</a></br>
+											<a href="192.168.10.24(-951351563663098487).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.24_192.168.10.24_离线导入_1</a></br>
+											<a href="192.168.10.7(-4314242318915888412).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.7_192.168.10.7_离线导入_1</a></br>
+											<a href="192.168.10.25(-992225878519822527).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.25_192.168.10.25_离线导入_1</a></br>
+											<a href="192.168.10.6(-5329940128886653073).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_1</a></br>
+											<a href="192.168.10.20(-5853882641125959506).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_1</a></br>
+											<a href="192.168.10.21(-4530567869402067699).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_1</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Linux-45</td>
+								<td align="left">设置关键文件的属性</td>
+								<td style="text-align: center;">中(权重=5)</td>
+								<td style="text-align: center;">0/14</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.8(-3908347663814198900).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.8_192.168.10.8_离线导入_1</a></br>
+											<a href="192.168.10.26(-5025909930876231342).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_1</a></br>
+											<a href="192.168.10.27(-6445701399805646295).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_1</a></br>
+											<a href="192.168.10.3(-6485496470053134548).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.3_192.168.10.3_离线导入_1</a></br>
+											<a href="192.168.10.2(-1405741011650923864).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.2_192.168.10.2_离线导入_1</a></br>
+											<a href="192.168.10.22(-4317990318831406938).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.22_192.168.10.22_离线导入_1</a></br>
+											<a href="192.168.10.5(-9202523164782685867).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_1</a></br>
+											<a href="192.168.10.23(-3205839720467779423).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.23_192.168.10.23_离线导入_1</a></br>
+											<a href="192.168.10.24(-951351563663098487).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.24_192.168.10.24_离线导入_1</a></br>
+											<a href="192.168.10.7(-4314242318915888412).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.7_192.168.10.7_离线导入_1</a></br>
+											<a href="192.168.10.25(-992225878519822527).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.25_192.168.10.25_离线导入_1</a></br>
+											<a href="192.168.10.6(-5329940128886653073).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_1</a></br>
+											<a href="192.168.10.20(-5853882641125959506).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_1</a></br>
+											<a href="192.168.10.21(-4530567869402067699).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_1</a></br>
+								</td>
+							</tr>
+							<tr>
+																<td align="left">Linux-49</td>
+								<td align="left">历史命令设置 </td>
+								<td style="text-align: center;">中低(权重=3)</td>
+								<td style="text-align: center;">0/14</td>
+								<td style="text-align: center;">0.00%</td>
+								<td align="left">
+											<a href="192.168.10.8(-3908347663814198900).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.8_192.168.10.8_离线导入_1</a></br>
+											<a href="192.168.10.26(-5025909930876231342).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.26_192.168.10.26_离线导入_1</a></br>
+											<a href="192.168.10.27(-6445701399805646295).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.27_192.168.10.27_离线导入_1</a></br>
+											<a href="192.168.10.3(-6485496470053134548).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.3_192.168.10.3_离线导入_1</a></br>
+											<a href="192.168.10.2(-1405741011650923864).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.2_192.168.10.2_离线导入_1</a></br>
+											<a href="192.168.10.22(-4317990318831406938).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.22_192.168.10.22_离线导入_1</a></br>
+											<a href="192.168.10.5(-9202523164782685867).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.5_192.168.10.5_离线导入_1</a></br>
+											<a href="192.168.10.23(-3205839720467779423).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.23_192.168.10.23_离线导入_1</a></br>
+											<a href="192.168.10.24(-951351563663098487).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.24_192.168.10.24_离线导入_1</a></br>
+											<a href="192.168.10.7(-4314242318915888412).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.7_192.168.10.7_离线导入_1</a></br>
+											<a href="192.168.10.25(-992225878519822527).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.25_192.168.10.25_离线导入_1</a></br>
+											<a href="192.168.10.6(-5329940128886653073).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.6_192.168.10.6_离线导入_1</a></br>
+											<a href="192.168.10.20(-5853882641125959506).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.20_192.168.10.20_离线导入_1</a></br>
+											<a href="192.168.10.21(-4530567869402067699).html" name="childrenPath" title="点击IP地址查看核查的详细结果" style='color:#6FB4DF;'>192.168.10.21_192.168.10.21_离线导入_1</a></br>
+								</td>
+							</tr>
+							<tr>
+								 
+							</tr>
+							 						</tbody>
+					</table>
+				</div>
+			
+				<h2 class="round-corner">
+					<span id="title7">7.核查失败设备列表</span>
+				</h2>
+				<div class="box">
+	
+					<table class="datagrid">
+						<thead>
+							<tr class="odd">
+								<td scope="col" style="width: 20%">名称</td>
+								<td scope="col" style="width: 20%">IP</td>
+								<td scope="col" style="width: 20%">类型</td>
+								<td scope="col" style="width: 40%">失败原因</td>
+							</tr>
+						</thead>
+						<tbody>
+							
+								<tr class='even'>
+									<td colspan='4' rowspan='1'  style="padding-left:10px">无数据</td>
+								</tr>
+						</tbody>
+					</table>
+				</div>
+			
+			<!-- openstack   start -->
+			<!-- openstack   end -->
+		</div>
+	</div>
+	<!-- 内容区结束  -->
+	<br />
+	<div id="footer">
+		<!-- 页脚开始  -->
+		<div id="footer-inner">
+			<p class="copyright">&copy;1996-2018, 北京启明星辰信息安全技术有限公司 版权所有</p>
+			<p class="version"></p>
+			<img src="images/footer.png" />
+		</div>
+		<form method="post" id="download_form" name="download_form">
+			<input type="hidden" id="filename" name="filename" />
+		</form>
+	</div>
+	<!-- 页脚结束  -->
+	
+	<div id="exportDIV" style="position: fixed; bottom: 50px; right: 20px;" >
+		<a href='#top' >Top</a>
+	</div>
+
+	<script language="javascript">
+      //Break All Words
+      void function(){
+        var aEl = document.getElementsByTagName('td');
+        var dEl,i;
+        var sName = "link";
+        var oReg =  new RegExp('(\\s|^)' + sName + '(\\s|$)');
+        for(i=0;dEl = aEl[i];i++){
+          if(dEl.className.match(oReg)){
+            breakWord(dEl);
+          }
+        }
+        
+        var paramName = "isOnline";
+        var returnVal = "";
+        var paramUrl = window.location.search; 
+        if (paramUrl.length > 0) {   
+        	paramUrl = paramUrl.substring(1, paramUrl.length);   
+        	var paramUrlArray = paramUrl.split("&");   
+        	for (var i = 0; i < paramUrlArray.length; i++) {   
+        		if (paramUrlArray[i].toLowerCase().indexOf(paramName.toLowerCase()) != -1) { 
+        			var temp = paramUrlArray[i].split("=");   
+        			if (temp[0].toLowerCase() == paramName.toLowerCase()) {
+        				returnVal = temp[1];   
+        				break;   
+        			}
+        		}
+        	}
+        }
+        
+        
+        
+        if(returnVal==1){
+        	var childrenPaths =document.getElementsByName("childrenPath"); 
+        	if(childrenPaths){
+        		for(var j=0; j<childrenPaths.length; j++){
+        			var childrenPath = childrenPaths[j];
+        			
+        			var childrenUrl = childrenPath.getAttribute('href'); 
+        			
+        			childrenUrl = childrenUrl + "?isOnline=1&time="+new Date().getTime();
+        			
+        			childrenPath.setAttribute('href',childrenUrl); 
+        		}
+        	}
+        }
+      }();
+      
+	function showReport(src){
+		window.location.href = src;
+	}
+</script>
+</body>
+</html>

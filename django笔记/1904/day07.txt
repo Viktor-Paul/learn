@@ -1,0 +1,104 @@
+day06回顾
+  数据表关联关系映射
+    关系型数据库
+        Oracle
+        IBM  DB2
+        Microsft SQL Server
+    关系表的建立
+      一对一
+      一对多
+        class Grade(...):
+            ..
+        class Banji(...):
+            grade= models.ForeignKey(Grade)
+            master = models.ForeignKey(User)
+           
+      多对多
+        class Author(...):
+             ....
+        class Book(...)
+             author = models.ManyToMany(Author)
+
+        a = Author()
+        b = Book()
+        a.book_set.add(b)
+
+        由收书找作者:
+            b.author.all()
+        由作者找书
+            a.book_set.all()
+
+
+    多对多其它表现形式:
+      class Student(models.Model):
+          name = models.CharField('姓名')
+        
+      class Subject(models.Model):
+           title = models.CharField('学科')
+    
+      class StudentScore(models.Model)
+          student = Model.ForeignKey(Student)
+          subject = Model.ForeignKey(Subject)
+          score = models.IntegerField('成绩')
+
+      xiaozhang = Student.objects.create(
+                 name='小张')
+      xiaoli = Student.objects.create(
+                 name='小李')
+
+      yuwen = Subject.objects.create(
+          title='语文')
+      shuxue = Subject.objects.create(
+          title='数学')
+      英语 = Subject.objects.create(
+          title='英语')
+
+cookes  浏览器端的存储方式
+  键值对方式存储
+    resp = HttpResponse()
+    resp.set_cookie(key, 值, max_age, ...)
+
+session 服务器端的存储方式
+    request.session['userinfo'] = {
+        'username': user.name
+        'id' : user.id
+    }
+    request.session.get('userinfo', None)
+   在浏览器端加会加一个COOKIE
+       sessionid='xxxxxyyyyzzyyaaa'
+
+
+路由:
+   http://127.0.0.1:8000/bookstore/book_list
+
+   如果路由为 '/bookstore' 且没有登陆就跳转到
+      '/userinfo/login'
+
+
+/bookstore/book
+/bookstore/book?page=1
+/bookstore/book?page=2
+
+http://127.0.0.1:8000/bookstore/book?page=4
+
+
+
+
+练习:
+   实现网云笔记
+      功能:
+         注册
+         登陆
+         查看以前自己的笔记
+         自己写一个新的笔记
+         修改以前的笔记
+         删除笔记
+    模型类
+        class User(models.Model):
+            ...
+        class Note(models.Model)：
+            title = CharField
+            content = CharField
+            user = models.ForeignKey(User)
+            create_time = models.DateField
+
